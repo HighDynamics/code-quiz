@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" src="./assets/css/style.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Code Quiz</title>
-</head>
-<body>
+  </head>
+  <body>
+    <span id="highscore-link">View High Scores</span>
+    <span id="timer">Time:</span>
+    <main>
+      <div id="landing-content">
+        <h1>Welcome to the Code Quiz</h1>
+        <p>
+          The following quiz will test your knowledge of JavaScript
+          fundamentals. You will be alloted 10 seconds for each question in the
+          quiz, but try to answer quickly and accurately as you'll have the
+          opportunity to submit your score based on the time remaining. Be
+          aware, a wrong answer will deduct 5 seconds from the clock!
+        </p>
+        <h2>Ready to begin?</h2>
+        <div class='center'>
+        <button id="start-btn" class="btn">Begin</button>
+        </div>
+      </div>
+    </main>
     <script src="./assets/js/script.js"></script>
-</body>
+  </body>
 </html>

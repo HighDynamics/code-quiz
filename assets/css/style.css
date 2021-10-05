@@ -1,0 +1,72 @@
+:root {
+  --blueish: rgb(97, 175, 239);
+  --reddish: rgb(190, 96, 105);
+  --whiteish: rgb(170, 178, 191);
+  --orangeish: rgb(201, 149, 99);
+  --greenish: rgb(150, 192, 119);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+body {
+  background-color: rgb(33, 37, 43);
+}
+
+#highscore-link {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: var(--blueish);
+}
+
+#timer {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: var(--reddish);
+}
+
+main {
+  width: 90%;
+  height: 40rem;
+  margin: 5rem auto;
+  padding: 0 2rem;
+  color: var(--whiteish);
+  background-color: rgb(40, 44, 52);
+  border: 3px solid var(--orangeish);
+}
+
+h1 {
+  text-align: center;
+  font-size: 3rem;
+}
+
+p {
+  text-align: center;
+}
+
+#landing-content h2 {
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 2rem;
+}
+
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.btn {
+  background-color: var(--blueish);
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
+
+.btn:hover {
+  background-color: var(--orangeish);
+}
