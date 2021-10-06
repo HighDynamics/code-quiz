@@ -21,6 +21,14 @@ body {
   top: 1rem;
   left: 1rem;
   color: var(--blueish);
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+}
+
+#highscore-link:hover {
+  color: var(--greenish);
+  cursor: pointer;
 }
 
 #timer {
