@@ -69,6 +69,11 @@ var questionsArray = [
   },
 ];
 
+// set timer for quiz and render
+var quizTimer = questionsArray.length * 10;
+var timerEl = document.getElementById("timer");
+timerEl.innerText = timerEl.innerText + " " + quizTimer;
+
 var landingContentEl = document.getElementById("landing-content");
 var startBtnEl = document.getElementById("start-btn");
 var mainEl = document.querySelector("main");
@@ -76,18 +81,32 @@ var mainEl = document.querySelector("main");
 // render questions, one by one
 var i = 0;
 var renderQuestions = function () {
+  // count down quiz timer
+  var timerInterval = setInterval(function () {
+    quizTimer--;
+    timerEl.innerText = "Time: " + quizTimer;
+  }, 1000);
+
   // create question timer
   var initialTimeout;
   var beginQuestionTimer = function (delay) {
     initialTimeout = setTimeout(function () {
       questionContainerEl.remove();
       renderQuestions();
+
+      // clear interval for quiz timer
+      clearInterval(timerInterval)
     }, delay);
   };
 
   var handleAnswerClick = function (event) {
+    // pause quiz timer
+    clearInterval(timerInterval);
+
+    // pause question timer
     clearTimeout(initialTimeout);
-    // pause Quiz timer
+    timerEl.innerText = "Time: " + quizTimer
+
     // style buttons
     if (event.target.innerText !== questionObject.correct.innerText) {
       event.target.setAttribute("style", "background-color: var(--reddish)");
@@ -149,6 +168,7 @@ var renderQuestions = function () {
 
 var startQuiz = function () {
   landingContentEl.remove();
+
   renderQuestions();
 };
 
