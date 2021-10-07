@@ -266,12 +266,20 @@ var displayHighscores = function () {
   goBackButtonEl.innerText = "Go Back";
   clearScoresButtonEl.innerText = "Clear Scores";
 
-  // create list items from highscoresArray
+  // order highscoresArray and create list items from highscoresArray
+  highscoresArray.sort((a,b) => (a.score < b.score) ? 1 : -1)
   for (var i = 0; i < highscoresArray.length; i++) {
     var listItem = document.createElement("li");
     var object = highscoresArray[i];
     listItem.innerHTML =
-      "<span>" + object.name + "</span>" + "<span>" + object.score + "</span>";
+      "<span>" +
+      (i + 1) +
+      ". " +
+      object.name +
+      "</span>" +
+      "<span>" +
+      object.score +
+      "</span>";
     highscoresList.appendChild(listItem);
   }
 

@@ -148,3 +148,10 @@ p {
   margin-bottom: 1rem;
   border-bottom: 2px solid var(--whiteish)
 }
+
+#highscores-display-container div {
+  margin: 1rem auto;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
