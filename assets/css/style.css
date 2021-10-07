@@ -4,6 +4,9 @@
   --whiteish: rgb(170, 178, 191);
   --orangeish: rgb(201, 149, 99);
   --greenish: rgb(150, 192, 119);
+  --dark-gray: rgb(33, 37, 43);
+  --light-gray: rgb(40, 44, 52);
+  --lighter-gray: rgb(58, 63, 71);
 }
 
 * {
@@ -13,7 +16,7 @@
 }
 
 body {
-  background-color: rgb(33, 37, 43);
+  background-color: var(--dark-gray);
 }
 
 #highscore-link {
@@ -44,7 +47,7 @@ main {
   margin: 5rem auto;
   padding: 0 2rem;
   color: var(--whiteish);
-  background-color: rgb(40, 44, 52);
+  background-color: var(--light-gray);
   border: 3px solid var(--orangeish);
 }
 
@@ -79,7 +82,7 @@ p {
   background-color: var(--orangeish);
 }
 
-#question-container{
+#question-container {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -87,11 +90,41 @@ p {
   width: 60%;
 }
 #question-container h2 {
-text-align: left;
+  text-align: left;
 }
 
 #question-container button {
-width: 40%;
-text-align: left;
-margin: .5rem 0
+  width: 40%;
+  text-align: left;
+  margin: 0.5rem 0;
+}
+
+#end-game-container h2 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+#score-submit-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 40%;
+}
+
+#score-submit-container input {
+  width: 100%;
+  font-size: 1.5rem;
+  color: var(--whiteish);
+  background-color: var(--lighter-gray);
+  border: none;
+  border: 2px solid var(--dark-gray);
+  margin-bottom: 1rem;
+}
+
+#score-submit-container input:focus {
+  outline: 1px solid var(--whiteish)
+}
+
+#score-submit-container button {
+  margin-right: 0.5rem;
 }

@@ -69,20 +69,21 @@ var questionsArray = [
   },
 ];
 
+// reference pertinent elements
+var landingContentEl = document.getElementById("landing-content");
+var startBtnEl = document.getElementById("start-btn");
+var mainEl = document.querySelector("main");
+
 // set timer for quiz and render
 var quizTimer = questionsArray.length * 10;
 var timerEl = document.getElementById("timer");
 var renderTimer = function () {
   timerEl.innerText = "Time: " + quizTimer;
 };
-renderTimer()
-
-var landingContentEl = document.getElementById("landing-content");
-var startBtnEl = document.getElementById("start-btn");
-var mainEl = document.querySelector("main");
+renderTimer();
 
 // render questions, one by one
-var i = 0;
+var questionIterator = 0;
 var renderQuestions = function () {
   // count down quiz timer
   var timerInterval = setInterval(function () {
@@ -115,10 +116,10 @@ var renderQuestions = function () {
 
       // incorrect answer should deduct 5 seconds from quiz timer
       quizTimer -= 5;
-      renderTimer()
+      renderTimer();
     }
     correctAnswerEl.setAttribute("style", "background-color: var(--greenish)");
-    beginQuestionTimer(3000);
+    beginQuestionTimer(2000);
   };
 
   // create container for question
@@ -126,8 +127,9 @@ var renderQuestions = function () {
   questionContainerEl.id = "question-container";
   mainEl.appendChild(questionContainerEl);
 
-  if (i < questionsArray.length) {
-    var questionObject = questionsArray[i];
+  // if there are more questions left and time has not expired, run
+  if (questionIterator < questionsArray.length && quizTimer > -1) {
+    var questionObject = questionsArray[questionIterator];
 
     // create question/answer elements
     var questionEl = document.createElement("h2");
@@ -151,9 +153,9 @@ var renderQuestions = function () {
       correctAnswerEl,
     ];
 
-    for (var j = 0; j < buttonArray.length; j++) {
-      buttonArray[j].className = "btn";
-      buttonArray[j].addEventListener("click", handleAnswerClick);
+    for (var i = 0; i < buttonArray.length; i++) {
+      buttonArray[i].className = "btn";
+      buttonArray[i].addEventListener("click", handleAnswerClick);
     }
 
     // render question/answer elements to DOM
@@ -166,15 +168,64 @@ var renderQuestions = function () {
     );
 
     // iterate for next question
-    i++;
+    questionIterator++;
 
     beginQuestionTimer(10000);
+  } else {
+    clearInterval(timerInterval);
+    endGame();
   }
+};
+
+var endGame = function () {
+  /* ---------------DELETE FOLLOWING LINE WHEN FINISHED--------------- */
+  landingContentEl.remove();
+  var storeScore = function () {
+    // TODO: add functionality
+  };
+  // create elements
+  var endGameContainerEl = document.createElement("div");
+  var endGameHeaderEl = document.createElement("h2");
+  var endGameTextEl = document.createElement("p");
+  var scoreSubmitContainer = document.createElement("div");
+  var scoreInputEl = document.createElement("input");
+  var submitScoreEl = document.createElement("button");
+  var skipButtonEl = document.createElement("button");
+
+  // set attributes
+  endGameContainerEl.id = "end-game-container";
+  scoreSubmitContainer.id = "score-submit-container";
+  scoreInputEl.type = "text";
+  submitScoreEl.className = "btn";
+  skipButtonEl.className = "btn";
+
+  // set text
+  endGameHeaderEl.innerText = "The quiz has ended";
+  endGameTextEl.innerText =
+    "Enter your name to submit your score.\nYour score: " + quizTimer;
+  submitScoreEl.innerText = "Submit";
+  skipButtonEl.innerText = "Skip";
+
+  // set listeners
+  submitScoreEl.addEventListener("click", storeScore);
+  skipButtonEl.addEventListener("click", displayHighscores);
+
+  scoreSubmitContainer.append(scoreInputEl, submitScoreEl, skipButtonEl);
+
+  endGameContainerEl.append(
+    endGameHeaderEl,
+    endGameTextEl,
+    scoreSubmitContainer
+  );
+  mainEl.appendChild(endGameContainerEl);
+};
+
+var displayHighscores = function () {
+  //TODO: build this
 };
 
 var startQuiz = function () {
   landingContentEl.remove();
-
   renderQuestions();
 };
 
