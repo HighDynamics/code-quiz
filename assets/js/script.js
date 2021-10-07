@@ -69,10 +69,15 @@ var questionsArray = [
   },
 ];
 
+var highscoresArray = localStorage.highscores
+  ? JSON.parse(localStorage.highscores)
+  : [];
+
 // reference pertinent elements
 var landingContentEl = document.getElementById("landing-content");
 var startBtnEl = document.getElementById("start-btn");
 var mainEl = document.querySelector("main");
+var highscoresLink = document.getElementById("highscore-link");
 
 // set timer for quiz and render
 var quizTimer = questionsArray.length * 10;
@@ -178,24 +183,27 @@ var renderQuestions = function () {
 };
 
 var endGame = function () {
-  /* ---------------DELETE FOLLOWING LINE WHEN FINISHED--------------- */
-  landingContentEl.remove();
   var storeScore = function () {
-    // TODO: add functionality
+    var name = nameInputEl.value;
+    highscoresArray.push({ name: name, score: quizTimer });
+    localStorage.highscores = JSON.stringify(highscoresArray);
+    endGameContainerEl.remove();
+    displayHighscores();
   };
+
   // create elements
   var endGameContainerEl = document.createElement("div");
   var endGameHeaderEl = document.createElement("h2");
   var endGameTextEl = document.createElement("p");
   var scoreSubmitContainer = document.createElement("div");
-  var scoreInputEl = document.createElement("input");
+  var nameInputEl = document.createElement("input");
   var submitScoreEl = document.createElement("button");
   var skipButtonEl = document.createElement("button");
 
   // set attributes
   endGameContainerEl.id = "end-game-container";
   scoreSubmitContainer.id = "score-submit-container";
-  scoreInputEl.type = "text";
+  nameInputEl.type = "text";
   submitScoreEl.className = "btn";
   skipButtonEl.className = "btn";
 
@@ -210,7 +218,7 @@ var endGame = function () {
   submitScoreEl.addEventListener("click", storeScore);
   skipButtonEl.addEventListener("click", displayHighscores);
 
-  scoreSubmitContainer.append(scoreInputEl, submitScoreEl, skipButtonEl);
+  scoreSubmitContainer.append(nameInputEl, submitScoreEl, skipButtonEl);
 
   endGameContainerEl.append(
     endGameHeaderEl,
@@ -221,7 +229,62 @@ var endGame = function () {
 };
 
 var displayHighscores = function () {
-  //TODO: build this
+  var goBack = function () {
+    highscoresDisplayContainerEl.remove();
+    quizTimer = questionsArray.length * 10;
+    renderTimer();
+    questionIterator = 0;
+    mainEl.appendChild(landingContentEl);
+  };
+
+  var clearHighscores = function () {
+    localStorage.clear();
+  };
+
+  // remove elements from DOM
+  mainEl.querySelector("div").remove();
+
+  // create elements
+  var highscoresDisplayContainerEl = document.createElement("div");
+  var highscoresHeaderEl = document.createElement("h2");
+  var highscoresList = document.createElement("ol");
+  var buttonContainer = document.createElement("div");
+  var goBackButtonEl = document.createElement("button");
+  var clearScoresButtonEl = document.createElement("button");
+
+  // set attributes
+  highscoresDisplayContainerEl.id = "highscores-display-container";
+  goBackButtonEl.className = "btn";
+  clearScoresButtonEl.className = "btn";
+
+  // set listeners
+  goBackButtonEl.addEventListener("click", goBack);
+  clearScoresButtonEl.addEventListener("click", clearHighscores);
+
+  // set text
+  highscoresHeaderEl.innerText = "High Scores";
+  goBackButtonEl.innerText = "Go Back";
+  clearScoresButtonEl.innerText = "Clear Scores";
+
+  // create list items from highscoresArray
+  for (var i = 0; i < highscoresArray.length; i++) {
+    var listItem = document.createElement("li");
+    var object = highscoresArray[i];
+    listItem.innerHTML =
+      "<span>" + object.name + "</span>" + "<span>" + object.score + "</span>";
+    highscoresList.appendChild(listItem);
+  }
+
+  // render elements
+  buttonContainer.append(goBackButtonEl, clearScoresButtonEl);
+
+  highscoresDisplayContainerEl.append(
+    highscoresHeaderEl,
+    highscoresList,
+    buttonContainer
+  );
+
+  mainEl.appendChild(highscoresDisplayContainerEl);
 };
 
 var startQuiz = function () {
@@ -230,3 +293,4 @@ var startQuiz = function () {
 };
 
 startBtnEl.addEventListener("click", startQuiz);
+highscoresLink.addEventListener("click", displayHighscores);

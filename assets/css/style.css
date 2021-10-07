@@ -128,3 +128,23 @@ p {
 #score-submit-container button {
   margin-right: 0.5rem;
 }
+
+#highscores-display-container h2 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+#highscores-display-container ol {
+  margin: 0 auto;
+  padding: 1rem;
+  width: 50%;
+  border: 2px solid var(--dark-gray);
+  background-color: var(--lighter-gray);
+}
+
+#highscores-display-container li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--whiteish)
+}
