@@ -72,7 +72,10 @@ var questionsArray = [
 // set timer for quiz and render
 var quizTimer = questionsArray.length * 10;
 var timerEl = document.getElementById("timer");
-timerEl.innerText = timerEl.innerText + " " + quizTimer;
+var renderTimer = function () {
+  timerEl.innerText = "Time: " + quizTimer;
+};
+renderTimer()
 
 var landingContentEl = document.getElementById("landing-content");
 var startBtnEl = document.getElementById("start-btn");
@@ -84,7 +87,7 @@ var renderQuestions = function () {
   // count down quiz timer
   var timerInterval = setInterval(function () {
     quizTimer--;
-    timerEl.innerText = "Time: " + quizTimer;
+    renderTimer();
   }, 1000);
 
   // create question timer
@@ -95,7 +98,7 @@ var renderQuestions = function () {
       renderQuestions();
 
       // clear interval for quiz timer
-      clearInterval(timerInterval)
+      clearInterval(timerInterval);
     }, delay);
   };
 
@@ -105,11 +108,14 @@ var renderQuestions = function () {
 
     // pause question timer
     clearTimeout(initialTimeout);
-    timerEl.innerText = "Time: " + quizTimer
 
     // style buttons
-    if (event.target.innerText !== questionObject.correct.innerText) {
+    if (event.target.innerText !== questionObject.correct) {
       event.target.setAttribute("style", "background-color: var(--reddish)");
+
+      // incorrect answer should deduct 5 seconds from quiz timer
+      quizTimer -= 5;
+      renderTimer()
     }
     correctAnswerEl.setAttribute("style", "background-color: var(--greenish)");
     beginQuestionTimer(3000);
