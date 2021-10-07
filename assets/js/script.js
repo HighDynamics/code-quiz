@@ -85,20 +85,25 @@ var renderQuestions = function () {
     }, delay);
   };
 
-  var handleAnswerClick = function () {
+  var handleAnswerClick = function (event) {
     clearTimeout(initialTimeout);
     // pause Quiz timer
     // style buttons
+    if (event.target.innerText !== questionObject.correct.innerText) {
+      event.target.setAttribute("style", "background-color: var(--reddish)");
+    }
+    correctAnswerEl.setAttribute("style", "background-color: var(--greenish)");
     beginQuestionTimer(3000);
   };
 
   // create container for question
   var questionContainerEl = document.createElement("div");
+  questionContainerEl.id = "question-container";
   mainEl.appendChild(questionContainerEl);
 
   if (i < questionsArray.length) {
     var questionObject = questionsArray[i];
-    
+
     // create question/answer elements
     var questionEl = document.createElement("h2");
     var wrongAnswerAEl = document.createElement("button");

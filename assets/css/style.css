@@ -78,3 +78,20 @@ p {
 .btn:hover {
   background-color: var(--orangeish);
 }
+
+#question-container{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin: 3rem auto;
+  width: 60%;
+}
+#question-container h2 {
+text-align: left;
+}
+
+#question-container button {
+width: 40%;
+text-align: left;
+margin: .5rem 0
+}
