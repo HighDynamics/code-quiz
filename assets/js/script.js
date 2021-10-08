@@ -115,7 +115,7 @@ var renderQuestions = function () {
     // pause question timer
     clearTimeout(initialTimeout);
 
-    // style buttons
+    // incorrect answer, style buttons
     if (event.target.innerText !== questionObject.correct) {
       event.target.setAttribute("style", "background-color: var(--reddish)");
 
@@ -132,7 +132,7 @@ var renderQuestions = function () {
   questionContainerEl.id = "question-container";
   mainEl.appendChild(questionContainerEl);
 
-  // if there are more questions left and time has not expired, run
+  // if there are more questions left and time has not expired
   if (questionIterator < questionsArray.length && quizTimer > -1) {
     var questionObject = questionsArray[questionIterator];
 
@@ -157,19 +157,25 @@ var renderQuestions = function () {
       wrongAnswerCEl,
       correctAnswerEl,
     ];
+    var buttonCollector = []
 
     for (var i = 0; i < buttonArray.length; i++) {
-      buttonArray[i].className = "btn";
-      buttonArray[i].addEventListener("click", handleAnswerClick);
+      var randomIndex = Math.floor(Math.random() * 4);
+      while(buttonCollector.includes(buttonArray[randomIndex])){
+        randomIndex = Math.floor(Math.random() * 4)
+      }
+      buttonArray[randomIndex].className = "btn";
+      buttonArray[randomIndex].addEventListener("click", handleAnswerClick);
+      buttonCollector.push(buttonArray[randomIndex])
     }
 
     // render question/answer elements to DOM
     questionContainerEl.append(
       questionEl,
-      wrongAnswerAEl,
-      wrongAnswerBEl,
-      wrongAnswerCEl,
-      correctAnswerEl
+      buttonCollector[0],
+      buttonCollector[1],
+      buttonCollector[2],
+      buttonCollector[3]
     );
 
     // iterate for next question
