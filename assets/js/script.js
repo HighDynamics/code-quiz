@@ -157,16 +157,23 @@ var renderQuestions = function () {
       wrongAnswerCEl,
       correctAnswerEl,
     ];
-    var buttonCollector = []
+
+    // loop through button elements randomly to select order of display
+    var buttonCollector = [];
 
     for (var i = 0; i < buttonArray.length; i++) {
       var randomIndex = Math.floor(Math.random() * 4);
-      while(buttonCollector.includes(buttonArray[randomIndex])){
-        randomIndex = Math.floor(Math.random() * 4)
+      while (buttonCollector.includes(buttonArray[randomIndex])) {
+        randomIndex = Math.floor(Math.random() * 4);
       }
       buttonArray[randomIndex].className = "btn";
       buttonArray[randomIndex].addEventListener("click", handleAnswerClick);
-      buttonCollector.push(buttonArray[randomIndex])
+
+      // give buttons numbers
+      buttonArray[randomIndex].innerText =
+        i+1 + ") " + buttonArray[randomIndex].innerText;
+
+      buttonCollector.push(buttonArray[randomIndex]);
     }
 
     // render question/answer elements to DOM
@@ -273,7 +280,7 @@ var displayHighscores = function () {
   clearScoresButtonEl.innerText = "Clear Scores";
 
   // order highscoresArray and create list items from highscoresArray
-  highscoresArray.sort((a,b) => (a.score < b.score) ? 1 : -1)
+  highscoresArray.sort((a, b) => (a.score < b.score ? 1 : -1));
   for (var i = 0; i < highscoresArray.length; i++) {
     var listItem = document.createElement("li");
     var object = highscoresArray[i];
