@@ -116,7 +116,7 @@ var renderQuestions = function () {
     clearTimeout(initialTimeout);
 
     // incorrect answer, style buttons
-    if (event.target.innerText !== questionObject.correct) {
+    if (!event.target.dataset.correct) {
       event.target.setAttribute("style", "background-color: var(--reddish)");
 
       // incorrect answer should deduct 5 seconds from quiz timer
@@ -143,12 +143,13 @@ var renderQuestions = function () {
     var wrongAnswerCEl = document.createElement("button");
     var correctAnswerEl = document.createElement("button");
 
-    // add text to question/answer elements
+    // add text to question/answer elements; give true value to correct answer dataset
     questionEl.innerText = questionObject.question;
     wrongAnswerAEl.innerText = questionObject.wrongA;
     wrongAnswerBEl.innerText = questionObject.wrongB;
     wrongAnswerCEl.innerText = questionObject.wrongC;
     correctAnswerEl.innerText = questionObject.correct;
+    correctAnswerEl.dataset.correct = true
 
     // add class and listener to answer elements
     var buttonArray = [
@@ -191,6 +192,7 @@ var renderQuestions = function () {
     beginQuestionTimer(10000);
   } else {
     clearInterval(timerInterval);
+    questionContainerEl.remove()
     endGame();
   }
 };
@@ -200,7 +202,6 @@ var endGame = function () {
     var name = nameInputEl.value;
     highscoresArray.push({ name: name, score: quizTimer });
     localStorage.highscores = JSON.stringify(highscoresArray);
-    endGameContainerEl.remove();
     displayHighscores();
   };
 
@@ -242,6 +243,9 @@ var endGame = function () {
 };
 
 var displayHighscores = function () {
+  // remove whatever container is present
+  document.querySelector("main div").remove()
+
   var goBack = function () {
     highscoresDisplayContainerEl.remove();
     quizTimer = questionsArray.length * 10;
@@ -253,9 +257,6 @@ var displayHighscores = function () {
   var clearHighscores = function () {
     localStorage.clear();
   };
-
-  // remove elements from DOM
-  mainEl.querySelector("div").remove();
 
   // create elements
   var highscoresDisplayContainerEl = document.createElement("div");
