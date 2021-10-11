@@ -9,4 +9,5 @@ Deployed App: [Code Quiz](http://highdynamics.github.io/code-quiz)
 - Deduction in time (-5s) if user answers incorrectly
 - Randomized answer order to keep user on their toes
 - Ability to submit highscore to local storage to keep track of progress
+- Up to 10 highscores displayed
 - Ability to clear highscores to start anew!
