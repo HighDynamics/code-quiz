@@ -36,7 +36,6 @@ body {
   background-color: var(--orangeish);
 }
 
-
 /* HIGHSCORE LINK AND TIMER STYLES */
 #highscore-link {
   position: absolute;
@@ -129,7 +128,7 @@ p {
 }
 
 #score-submit-container input:focus {
-  outline: 1px solid var(--whiteish)
+  outline: 1px solid var(--whiteish);
 }
 
 #score-submit-container button {
@@ -154,7 +153,7 @@ p {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
-  border-bottom: 2px solid var(--whiteish)
+  border-bottom: 2px solid var(--whiteish);
 }
 
 #highscores-display-container div {
@@ -162,4 +161,35 @@ p {
   width: 50%;
   display: flex;
   justify-content: space-around;
+}
+
+@media only screen and (max-width: 480px) {
+  .btn {
+    font-size: 1rem;
+    min-height: 2rem;
+  }
+
+  #question-container {
+    width: 100%;
+  }
+
+  #question-container h2 {
+    font-size: 1.3rem;
+  }
+
+  #question-container button {
+    width: 80%;
+  }
+
+  #score-submit-container {
+    width: 100%;
+  }
+
+  #highscores-display-container ol {
+    width: 100%;
+  }
+
+  #highscores-display-container div {
+    width: 90%;
+  }
 }

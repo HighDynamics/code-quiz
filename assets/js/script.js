@@ -22,7 +22,7 @@ var questionsArray = [
   },
   {
     question:
-      "At which index is 'cat' given the following array?\nvar arr = ['dog', 'cat', 'mouse', 'bird']",
+      "At which index is 'cat' given the following array?\n['dog', 'cat', 'mouse', 'bird']",
     wrongA: "0",
     wrongB: "2",
     wrongC: "3",
