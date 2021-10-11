@@ -9,6 +9,7 @@
   --lighter-gray: rgb(58, 63, 71);
 }
 
+/* UTILITY STYLES */
 * {
   box-sizing: border-box;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -19,6 +20,24 @@ body {
   background-color: var(--dark-gray);
 }
 
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.btn {
+  background-color: var(--blueish);
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
+
+.btn:hover {
+  background-color: var(--orangeish);
+}
+
+
+/* HIGHSCORE LINK AND TIMER STYLES */
 #highscore-link {
   position: absolute;
   top: 1rem;
@@ -41,6 +60,7 @@ body {
   color: var(--reddish);
 }
 
+/* MAIN SECTION STYLES */
 main {
   width: 90%;
   height: 40rem;
@@ -51,6 +71,7 @@ main {
   border: 3px solid var(--orangeish);
 }
 
+/* LANDING STYLES */
 h1 {
   text-align: center;
   font-size: 3rem;
@@ -66,22 +87,7 @@ p {
   font-size: 2rem;
 }
 
-.center {
-  margin: 0 auto;
-  text-align: center;
-}
-
-.btn {
-  background-color: var(--blueish);
-  border: none;
-  border-radius: 5px;
-  font-size: 1.5rem;
-}
-
-.btn:hover {
-  background-color: var(--orangeish);
-}
-
+/* QUESTION AND ANSWER STYLES */
 #question-container {
   display: flex;
   flex-direction: column;
@@ -99,6 +105,7 @@ p {
   margin: 0.5rem 0;
 }
 
+/* END GAME STYLES */
 #end-game-container h2 {
   font-size: 2rem;
   text-align: center;
@@ -129,6 +136,7 @@ p {
   margin-right: 0.5rem;
 }
 
+/* HIGHSCORES STYLES */
 #highscores-display-container h2 {
   text-align: center;
   font-size: 2rem;
