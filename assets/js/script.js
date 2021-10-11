@@ -200,6 +200,11 @@ var renderQuestions = function () {
 var endGame = function () {
   var storeScore = function () {
     var name = nameInputEl.value;
+    if(!name){
+      alert("Enter a name to save your score!")
+      nameInputEl.setAttribute("style", "outline: 1px solid var(--reddish)")
+      return false
+    }
     highscoresArray.push({ name: name, score: quizTimer });
     localStorage.highscores = JSON.stringify(highscoresArray);
     displayHighscores();
@@ -282,7 +287,8 @@ var displayHighscores = function () {
 
   // order highscoresArray and create list items from highscoresArray
   highscoresArray.sort((a, b) => (a.score < b.score ? 1 : -1));
-  for (var i = 0; i < highscoresArray.length; i++) {
+  var highscoreCount = highscoresArray.length > 10 ? 10 : highscoresArray.length
+  for (var i = 0; i < highscoreCount; i++) {
     var listItem = document.createElement("li");
     var object = highscoresArray[i];
     listItem.innerHTML =
